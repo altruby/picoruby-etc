@@ -26,16 +26,13 @@ mrb_value Time(mrb_state *mrb)
 }
 
 static
-mrb_value timeat(mrb_state *mrb, time_t at)
+mrb_value time_at(mrb_state *mrb, time_t at)
 {
   if (at <= 0)
     return mrb_nil_value();
   else
     return mrb_funcall(
-      mrb,
-      Time(mrb),
-      "at",
-      1,
+      mrb, Time(mrb), "at", 1,
       mrb_int64_value(mrb, (int64_t)at)
     );
 }
@@ -58,17 +55,18 @@ mrb_value etcrows(mrb_state *mrb, mrb_value self)
       mrb_str_new_cstr(mrb, row->pw_passwd),
       mrb_uint64_value(mrb, (uint64_t)row->pw_uid),
       mrb_uint64_value(mrb, (uint64_t)row->pw_gid),
-      timeat(mrb, row->pw_change),
+      time_at(mrb, row->pw_change),
       mrb_str_new_cstr(mrb, row->pw_class),
       mrb_str_new_cstr(mrb, row->pw_gecos),
       mrb_str_new_cstr(mrb, row->pw_dir),
       mrb_str_new_cstr(mrb, row->pw_shell),
-      timeat(mrb, row->pw_expire)
+      time_at(mrb, row->pw_expire)
     );
     mrb_ary_push(mrb, mrows, r);
     mrb_gc_arena_restore(mrb, ai);
   }
-  if(errno != 0) mrb_sys_fail(mrb, "getpwent");
+  if(errno != 0)
+    mrb_sys_fail(mrb, "getpwent");
   endpwent();
   return mrows;
 }
