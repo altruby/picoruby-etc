@@ -8,7 +8,7 @@ BUILD_STAMP    = tmp/build.stamp
 
 .PHONY: all build test clean distclean
 
-all: test
+all: build
 
 build: $(BUILD_STAMP)
 
