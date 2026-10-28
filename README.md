@@ -67,10 +67,27 @@ end
 The Etc module extends Enumerable into itself
 and yields instances of Etc::Row. A row represents
 an instance of `struct passwd` that is returned
-by the getpwent(3) family of functions. 
+by the [getpwent(3)](https://man.freebsd.org/getpwent) 
+family of functions. This  information comes directly 
+from the password database described by 
+[passwd(5)](https://man.freebsd.org/passwd?sektion=5).
 
 ```ruby
+##
+# Find a user
 Etc.find { it.name == "robert" }
+
+##
+# Select users
+Etc.select { it.shell == "/bin/sh" }
+
+##
+# Enumerate users
+Etc.each do 
+  print "name  ", "\t", it.name,  "\n"
+  print "home  ", "\t", it.home,  "\n"
+  print "shell ", "\t", it.shell, "\n"
+end
 ```
 
 ## License
