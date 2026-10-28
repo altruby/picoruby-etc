@@ -34,11 +34,16 @@ mrb_value etcrows(mrb_state *mrb, mrb_value self)
       mrb,
       mrow,
       "new",
-      4,
+      9,
       mrb_str_new_cstr(mrb, row->pw_name),
       mrb_str_new_cstr(mrb, row->pw_passwd),
       mrb_uint64_value(mrb, (uint64_t)row->pw_uid),
-      mrb_uint64_value(mrb, (uint64_t)row->pw_gid)
+      mrb_uint64_value(mrb, (uint64_t)row->pw_gid),
+      mrb_nil_value(),
+      mrb_str_new_cstr(mrb, row->pw_class),
+      mrb_str_new_cstr(mrb, row->pw_gecos),
+      mrb_str_new_cstr(mrb, row->pw_dir),
+      mrb_str_new_cstr(mrb, row->pw_shell)
     );
     mrb_ary_push(mrb, mrows, r);
   }
