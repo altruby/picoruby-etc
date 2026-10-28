@@ -53,10 +53,7 @@ mrb_value etcrows(mrb_state *mrb, mrb_value self)
     mrb_value r;
     int ai = mrb_gc_arena_save(mrb);
     r = mrb_funcall(
-      mrb,
-      mrow,
-      "new",
-      10,
+      mrb, mrow, "new", 10,
       mrb_str_new_cstr(mrb, row->pw_name),
       mrb_str_new_cstr(mrb, row->pw_passwd),
       mrb_uint64_value(mrb, (uint64_t)row->pw_uid),
