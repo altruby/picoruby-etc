@@ -70,7 +70,7 @@ an instance of `struct passwd` that is returned
 by the [getpwent(3)](https://man.freebsd.org/getpwent) 
 family of functions. This  information comes directly 
 from the password database described by 
-[passwd(5)](https://man.freebsd.org/passwd?sektion=5).
+[passwd(5)](https://man.freebsd.org/passwd?sektion=5):
 
 ```ruby
 ##
