@@ -26,18 +26,18 @@ to embed picoruby's bytecode into a C program.
 
 The next few lines will build your own copy 
 of the picoruby executable. The executable
-is linked against picoruby-jail and when it
+is linked against picoruby-etc and when it
 is run it automatically has access to the
-picoruby-jail classes, modules and methods. 
+picoruby-etc classes, modules and methods. 
 This can be surprising compared to mainline
 CRuby where there is a single copy of the 
 executable that is built once on install: 
 
     $ git clone --recurse-submodules https://github.com/picoruby/picoruby picoruby
-    $ git clone https://github.com/altruby/picoruby-jail
-    $ cd picoruby-jail
+    $ git clone https://github.com/altruby/picoruby-etc
+    $ cd picoruby-etc
     $ make build
-    $ ../picoruby/build/picoruby-jail/bin/picoruby -e 'p Jail.all'
+    $ ../picoruby/build/picoruby-etc/bin/picoruby -e 'p Jail.all'
 
 ##### build_config.rb
 
@@ -56,6 +56,24 @@ The configuration (`build_config.rb`):
 MRuby::Build.new("app") do |conf|
   conf.toolchain
   conf.gembox "default"
-  conf.gem github: "altruby/picoruby-jail", branch: "main"
+  conf.gem github: "altruby/picoruby-etc", branch: "main"
 end
 ```
+
+## Quick start
+
+##### Enumerable
+
+The Etc module extends Enumerable into itself
+and yields instances of Etc::Row. A row represents
+an instance of `struct passwd` that is returned
+by the getpwent(3) family of functions. 
+
+```ruby
+Etc.find { it.name == "robert" }
+```
+
+## License
+
+MIT. <br>
+See [LICENSE]() for details.
