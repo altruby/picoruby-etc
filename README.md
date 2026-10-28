@@ -37,7 +37,7 @@ executable that is built once on install:
     $ git clone https://github.com/altruby/picoruby-etc
     $ cd picoruby-etc
     $ make build
-    $ ../picoruby/build/picoruby-etc/bin/picoruby -e 'p Jail.all'
+    $ ../picoruby/build/picoruby-etc/bin/picoruby -e 'p Etc.select { it.uid == 0 }'
 
 ##### build_config.rb
 
