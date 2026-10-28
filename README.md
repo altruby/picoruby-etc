@@ -90,6 +90,11 @@ Etc.each do
 end
 ```
 
+## Problems
+
+It's not thread safe.  
+Planned for the future.
+
 ## License
 
 MIT. <br>
